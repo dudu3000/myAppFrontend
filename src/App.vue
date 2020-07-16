@@ -33,13 +33,20 @@ export default {
 
 <style>
 .text{
-  width: 100%;
+  width: 50%;
   font-size: 25px;
   border: 2px solid #000000;
   border-radius: 15px;
   box-shadow: rgba(0, 0, 0, 0.75);
   padding:10px;
   margin-top:25px;
+  margin-left: 50px;
+
+}
+
+#username{
+
+  margin-top: 50px;
 
 }
 
