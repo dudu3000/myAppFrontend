@@ -7,37 +7,32 @@
 
         <div class="labels">Username: </div>
         <input type="text" placeholder="Username" id="username" v-model="username" /><br><br>
-    
+
         <div class="labels">Password: </div>
         <input type="password" placeholder="Password" id="password" v-model="password" /><br><br><br><br>
-    
+
         <button type="submit">Login</button>
-    
+
         </form>
-      {{ token }}
       <br><br><br><br><br>
     </main>
   </div>
 
-
-
-
-
-  
 </template>
 
 
 
 
 <script>
-
+if(localStorage.getItem('user-token') !== 'undefined'){
+    window.location.href = '/';
+}
 export default { 
   name: 'App',
   data(){
     return {
       validReturn: null,
       errorReturn: null,
-      token: null,
       username: null,
       password: null,
       axios: require('axios').default,
@@ -52,16 +47,15 @@ export default {
           "password": this.password,
           "minutes": 10
         }).then((response) => {
-          this.validReturn = response.data.text; 
-          this.token = response.data.token;
-          localStorage.setItem('user-token', this.token);
-          this.errorReturn = null
+          this.validReturn = response.data.text;
+          this.errorReturn = null;
+          localStorage.setItem('user-token', response.data.token);
+          window.location.href = '/';
           }, 
         (error) => {
           this.errorReturn = 'Failed to login. Incorrect username or password!(' + error + ')'; 
           this.validReturn = null;
         });
-        window.location.href = '/';
       
 
     }

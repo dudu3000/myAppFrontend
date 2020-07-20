@@ -3,8 +3,8 @@
     <main>
         Welcome
         <br><br>
-        <a href="/login"><button>Login</button></a>
-        {{ state.token }}
+        <a href="/login" v-if="state.token == 'undefined'"><button>Login</button></a><br><br>
+        <a href="/logout" v-if="state.token !== 'undefined'"><button>Logout</button></a>
       
     </main>
   </div>
