@@ -3,32 +3,19 @@
     <main>
       <div class="errorMessage" v-if="errorReturn !== null">{{ errorReturn }}</div>
       <div class="validMessage" v-if="validReturn !== null">{{ validReturn }}</div>
-      <div class="labels">Username: </div>
+      <form class="login" @submit.prevent="login">
 
-      <input 
-      type="text" 
-      placeholder="Username" 
-      id="username" 
-      v-model="username" 
-      /><br><br>
-
-
-      <div class="labels">Password: </div>
-
-      <input 
-      type="password" 
-      placeholder="Password" 
-      id="password" 
-      v-model="password" 
-      @keypress="login" 
-      /><br>
-      
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <div>{{ token }}</div>
+        <div class="labels">Username: </div>
+        <input type="text" placeholder="Username" id="username" v-model="username" /><br><br>
+    
+        <div class="labels">Password: </div>
+        <input type="password" placeholder="Password" id="password" v-model="password" /><br><br><br><br>
+    
+        <button type="submit">Login</button>
+    
+        </form>
+      {{ token }}
+      <br><br><br><br><br>
     </main>
   </div>
 
@@ -46,7 +33,6 @@
 
 export default { 
   name: 'App',
-  el: '#app',
   data(){
     return {
       validReturn: null,
@@ -59,9 +45,8 @@ export default {
   },
 
   methods: {
-    login (e) {
+    login () {
 
-      if(e.key == "Enter"){
         this.axios.post('http://localhost:3000/user/login', {
           "userName": this.username,
           "password": this.password,
@@ -69,13 +54,15 @@ export default {
         }).then((response) => {
           this.validReturn = response.data.text; 
           this.token = response.data.token;
+          localStorage.setItem('user-token', this.token);
           this.errorReturn = null
           }, 
         (error) => {
           this.errorReturn = 'Failed to login. Incorrect username or password!(' + error + ')'; 
           this.validReturn = null;
         });
-      }
+        window.location.href = '/';
+      
 
     }
   }

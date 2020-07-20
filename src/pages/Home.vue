@@ -1,28 +1,29 @@
 <template>
   <div id="home">
     <main>
-        {{ login.token }}
+        Welcome
+        <br><br>
+        <a href="/login"><button>Login</button></a>
+        {{ state.token }}
       
     </main>
   </div>
 
-
-
-
-
-  
 </template>
 
 
 
 
 <script>
-const login = {token: ''}
+const state = {
+    token: localStorage.getItem('user-token') || '',
+    status: ''
+}
 export default { 
   name: 'home',
-  el: '#home',
   data(){
       return {
+          state
       }
   }
 }
