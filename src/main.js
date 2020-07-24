@@ -1,5 +1,7 @@
 import Vue from 'vue'
+import Vuex from 'vuex'
 import routes from './routes'
+
 
 const app = new Vue({
   el: '#app',
@@ -21,4 +23,21 @@ const app = new Vue({
 
 window.addEventListener('popstate', () => {
   app.currentRoute = window.location.pathname
+})
+
+
+
+
+Vue.use(Vuex);
+
+
+const store = new Vuex.Store({
+  state: {
+    token: ''
+  },
+  mutations: {
+    addToken (token){
+      state.token
+    }
+  }
 })
