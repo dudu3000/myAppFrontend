@@ -1,5 +1,5 @@
 <template>
-  <div id="App">
+  <div id="app">
     <main>
       <div class="errorMessage" v-if="errorReturn !== null">{{ errorReturn }}</div>
       <div class="validMessage" v-if="validReturn !== null">{{ validReturn }}</div>
@@ -14,6 +14,10 @@
         <button type="submit">Login</button>
 
         </form>
+        <div v-if="token !== 'undefined'" style="display: none;">
+        {{ $store.dispatch('addToken', token) }}
+        </div>
+        {{ $store.state.token }}
       <br><br><br><br><br>
     </main>
   </div>
@@ -27,21 +31,22 @@
 if(localStorage.getItem('user-token') !== 'undefined'){
     window.location.href = '/';
 }
+
 export default { 
-  name: 'App',
+  name: 'login',
   data(){
     return {
       validReturn: null,
       errorReturn: null,
       username: null,
       password: null,
+      token: 'undefined',
       axios: require('axios').default,
     }
   },
 
   methods: {
     login () {
-
         this.axios.post('http://localhost:3000/user/login', {
           "userName": this.username,
           "password": this.password,
@@ -50,6 +55,7 @@ export default {
           this.validReturn = response.data.text;
           this.errorReturn = null;
           localStorage.setItem('user-token', response.data.token);
+          this.token = response.data.token;
           window.location.href = '/';
           }, 
         (error) => {

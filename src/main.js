@@ -1,10 +1,16 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import store from './store.js';
 import routes from './routes'
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+import locale from 'element-ui/lib/locale/lang/en'
 
+
+Vue.use(ElementUI, { locale })
 
 const app = new Vue({
   el: '#app',
+  store,
   data: {
     currentRoute: window.location.pathname
   },
@@ -21,23 +27,10 @@ const app = new Vue({
   }
 })
 
+
+
 window.addEventListener('popstate', () => {
   app.currentRoute = window.location.pathname
 })
 
 
-
-
-Vue.use(Vuex);
-
-
-const store = new Vuex.Store({
-  state: {
-    token: ''
-  },
-  mutations: {
-    addToken (token){
-      state.token
-    }
-  }
-})

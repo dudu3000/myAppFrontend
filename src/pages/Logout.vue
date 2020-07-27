@@ -1,5 +1,5 @@
 <template>
-  <div id="logout">
+  <div id="app">
     <main>
     </main>
   </div>

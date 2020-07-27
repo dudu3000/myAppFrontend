@@ -1,11 +1,17 @@
 <template>
-  <div id="home">
+  <div id="app">
     <main>
-        Welcome
-        <br><br>
-        <a href="/login" v-if="state.token == 'undefined'"><button>Login</button></a><br><br>
-        <a href="/logout" v-if="state.token !== 'undefined'"><button>Logout</button></a>
-      
+      <el-row :gutter="20">
+        <el-col :span="6"><div class="grid-content bg-purple">
+          
+          Welcome
+          {{ $store.state.token }}
+          <br><br>
+          <a href="/login" v-if="state.token == 'undefined'"><button>Login</button></a><br><br>
+          <a href="/logout" v-if="state.token !== 'undefined'"><button>Logout</button></a>
+        
+        </div></el-col>
+      </el-row>
     </main>
   </div>
 
@@ -34,18 +40,25 @@ export default {
 
 
 <style>
-
-main{
-  margin-top: 100px;
-  margin-left: auto;
-  margin-right: auto;
-  border: 4px solid #aa3333;
-  height: 400px;
-  width: 70%;
-  background-color: #cccc99;
-  border-radius: 30px;
-  padding: 25px;
+.el-row {
+  margin-bottom: 20px;
+  &:last-child {
+    margin-bottom: 0;
+  }
 }
+.el-col {
+  border-radius: 4px;
+}
+  .bg-purple {
+    background: #d3dce6;
+  }
+  .bg-purple-light {
+    background: #e5e9f2;
+  }
+  .grid-content {
+    border-radius: 4px;
+    min-height: 36px;
+  }
 
 
 </style>
