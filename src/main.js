@@ -1,13 +1,6 @@
 import Vue from 'vue'
 import store from './store.js';
-import routes from './routes'
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
-import locale from 'element-ui/lib/locale/lang/en'
-
-
-Vue.use(ElementUI, { locale })
-
+import routes from './routes';
 const app = new Vue({
   el: '#app',
   store,
